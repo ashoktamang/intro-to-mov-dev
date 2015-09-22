@@ -2,22 +2,16 @@
 //making an object is not necessary.
 var myApp = angular.module('app', ['ionic']);
 
-myApp.controller("name", function($scope){
-	//this is not visible
-	var private_greetings = "Hello World";
+myApp.controller("name", function($scope, $http){
+	
+	//these are  not visible
+	var private_greetings = "Ashok";
+	var message = "Assignment 2"
 
 	//this is visible
 	$scope.mygreetings = private_greetings;
+	$scope.message = message;
 
-	$scope.items = [
-				"Storm Spirit",
-				"Life Stealer",
-				"Vengeful Spirit",
-				"Troll Warlord",
-				"Ashok Tamang",
-				"Lina",
-				"Puck",
-				];
 
 	//Auth for parse account and details in it
 	var authenticationHeaders = {
@@ -31,7 +25,7 @@ myApp.controller("name", function($scope){
         headers: authenticationHeaders,
     };
 
-    function login() {
+    $scope.login = function() {
     	// copies the object...
 	    var settings = {
 	        "async": true,
@@ -46,51 +40,18 @@ myApp.controller("name", function($scope){
 	    }
 	};
 
-	$scope.login = login();
+	//Initiliazing an object settings to 
+    var settings = $.extend({}, defaultSettings);
 
-	var getStuff = [];
+    // sets the specific URL for $http.get method
+    settings.url = "https://api.parse.com/1/classes/stuff";
 
-	
-	var getStuffList = function() {
+    // sets the appropriate REST VERB for tha API call
+    settings.method = "GET";
 
-        // copies the object...
-        var settings = $.extend({}, defaultSettings);
-
-        // sets the specific URL for the ajax call, this
-        // information would be specified in the API documentation
-        settings.url = "https://api.parse.com/1/classes/stuff";
-
-        // sets the appropriate REST VERB for tha API call, this
-        // information would be specified in the API documentation
-        settings.method = "GET";
-
-        // makes the call using http client for jQuery $.ajax
-        $.ajax(settings).done(function(response) {
-            console.log(JSON.stringify(response, null, 2));
-
-            // Parsing the data the values of the key "results" from the JSON object
-            console.log(response["results"]);
-            console.log("where is you?");
-
-            var resultsArray = response["results"];
-            for (i = 0; i < resultsArray.length; i++) {
-            	var results = resultsArray[i];
-            	console.log(JSON.stringify(results, null, 2));
-            }
-        getStuff = response["results"];
-
-        });
-    }
-
-    $scope.getStuffList = getStuff;
-
-    console.log("hellow");
-
-    $scope.hey = [
-    		"hey",
-    		"hi",
-    		"hello",
-    ];
-    
-    
+    // gets the data from Parse, if successfull
+	$http(settings).success(function(response){
+		$scope.stuff = response.results;
+	});
 });
+

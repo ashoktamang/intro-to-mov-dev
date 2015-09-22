@@ -10,27 +10,31 @@
     <script src="http://code.jquery.com/jquery-2.0.0.min.js"></script>
  
     <!-- Linking to js files -->
-    <script src="service.js" type="text/javascript"></script>
     <script src="app.js" type="text/javascript"></script>
 
   </head>
   <body ng-app="app" ng-controller="name">
     <ion-pane>
       <ion-header-bar class="bar-stable">
-        {{ mygreetings }}
-        <h1 class="title">Awesome App</h1>
+        <h1 class="title">{{ mygreetings + "'s" }} Awesome App for {{ message }}</h1>
       </ion-header-bar>
-      <ion-content class"has-header">
+      </br>
+      <ion-content class="has-header">
+        <div class="bar bar-header bar-stable">
+          <h1 class="title">Here are the list of Stuffs from Parse</h1>
+        </div></br></br>
         <ion-list>
-          <ion-item ng-repeat="item in getStuffList">
-            {{ item | json }}
+          <ion-item ng-repeat="item in stuff">
+            <pre> {{ item | json }} </pre>
           </ion-item>
         </ion-list>
+        </br>
 
-       Stuffs{{ getStuff }}
-
-
-
+        <!-- routing to parse-rest-api.html to make changes to data in Parse -->
+        <button class="button button-stable" onclick="location.href='parse-rest-api.html';">
+          Update Parse Stuffs
+        </button>
+      
       </ion-content>
     </ion-pane>
   </body>
