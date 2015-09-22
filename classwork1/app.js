@@ -41,7 +41,7 @@ myApp.controller("name", function($scope, $http){
 	};
 
 	//Initiliazing an object settings to 
-    var settings = $.extend({}, defaultSettings);
+    var settings = angular.extend({}, defaultSettings);
 
     // sets the specific URL for $http.get method
     settings.url = "https://api.parse.com/1/classes/stuff";
