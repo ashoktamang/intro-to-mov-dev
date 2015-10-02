@@ -1,0 +1,62 @@
+<ion-view title="Home">
+    <ion-pane>
+        <ion-header-bar class="bar-stable">
+            <h1 class="title"> Awesome App as</h1>
+        </ion-header-bar>
+        </br>
+        <ion-content class="has-header">
+            <div class="bar bar-header bar-stable">
+                <h1 class="title">Here are the list of Stuffs from Parse</h1>
+
+                <button class="button">
+                    <i class="icon ion-android-add-circle"></i>
+                </button>
+            </div></br></br>
+            <br />
+            <ion-list
+                    show-delete="shouldShowDelete"
+                    show-reorder="shouldShowReorder"
+                    can-swipe="listCanSwipe">
+                <ion-item ng-repeat="item in stuffs track by item.objectId"  ng-href="#/detail/{{item.objectId}}"
+                          class="item-thumbnail-left">
+                    Name: {{ item.name }} <br/>
+                    Room No: s{{ item.room }}
+
+                    <ion-option-button class="button-positive"
+                                       ng-click="deleteStuff(item)">
+                        Delete
+                    </ion-option-button>
+                    <ion-option-button class="button-info"
+                                       ng-click="updateStuff(item)">
+                        Update
+                    </ion-option-button>
+                </ion-item>
+            </ion-list>
+            </br>
+
+            <!-- Adding Stuff feature-->
+            <p> Add Stuff </p>
+            <div class="list">
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label">Name</span>
+                    <input type="text" placeholder="Ashok" ng-model="stuffName">
+                </label>
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label">Room No.</span>
+                    <input type="text" placeholder="52C" ng-model="stuffRoom">
+                </label>
+            </div>
+
+            <button class="button" ng-click="addStuff(stuff)">
+                <i class="icon ion-ios-plus-outline"></i>
+            </button>
+
+            {{ stuff.name }}
+
+
+        </ion-content>
+
+    </ion-pane>
+
+
+</ion-view>
