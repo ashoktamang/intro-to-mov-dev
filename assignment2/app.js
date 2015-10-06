@@ -25,6 +25,12 @@ angular.module('app', ['ionic', 'starter.services'])
             showDelete: false
         };
 
+        $scope.stuffName = "";
+        $scope.stuffRoom = "";
+
+        console.log($scope.stuffName);
+        console.log($scope.stuffRoom);
+
         $scope.addStuff = function (stuff) {
 
             stuff = {
@@ -33,6 +39,7 @@ angular.module('app', ['ionic', 'starter.services'])
             }
             ParseService.addStuff(stuff).then(function (response) {
                 console.log('addStuff', response);
+                $scope.getStuffList();
 
             })
 
